@@ -4,4 +4,4 @@ const router = require('./routes');
 
 app.use(router);
 
-app.listen(3333);;
+module.exports = app;
