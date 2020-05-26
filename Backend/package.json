@@ -1,0 +1,28 @@
+{
+  "name": "JavascriptWebsiteTemplate",
+  "version": "1.0.0",
+  "description": "A customized website template built with ExpressJs in the backend and ReactJs in the frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElianMariano/JavascriptWebsiteTemplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ElianMariano/JavascriptWebsiteTemplate/issues"
+  },
+  "homepage": "https://github.com/ElianMariano/JavascriptWebsiteTemplate#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "expressjs": "^1.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
