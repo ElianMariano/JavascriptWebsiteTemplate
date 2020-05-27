@@ -9,6 +9,7 @@ module.exports = {
     migrations: {
       directory: './src/database/migrations/',
     },
+    useNullAsDefault: true,
   },
 
   development: {
@@ -19,6 +20,7 @@ module.exports = {
     migrations: {
       directory: './src/database/migrations/',
     },
+    useNullAsDefault: true,
   },
 
   staging: {

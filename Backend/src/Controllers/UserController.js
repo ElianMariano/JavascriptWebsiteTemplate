@@ -1,11 +1,20 @@
 module.exports = {
-    sessions: function (req, res){
-        console.log("Session");
-        res.send({'id': 'newid'});
+    login: function (req, res){
+        console.log("Login");
+        return res.send({
+            'auth': 'newid',
+        });
     },
 
-    sign_in: function (req, res){
+    logout: function (req, res){
+        console.log("Log out");
+        return res.send({
+            'logout': true,
+        });
+    },
+
+    sign_up: function (req, res){
         console.log("Sign in");
-        res.send({'id': 'new user'});
-    }
+        return res.send({'auth': 'id'});
+    },
 }

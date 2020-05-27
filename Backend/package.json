@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ElianMariano/JavascriptWebsiteTemplate#readme",
   "dependencies": {
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "expressjs": "^1.0.1",
     "knex": "^0.21.1",
