@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.string('name').notNullable();
         table.string('email').notNullable();
         table.string('password').notNullable();
-        table.string('auth');
+        table.string('auth', 20);
         table.boolean('is_admin').notNullable();
     });
 };

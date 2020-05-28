@@ -12,6 +12,7 @@ router.post('/sign-up', UserController.sign_up);
 // Posts routes
 router.get('/post-profile', PostController.post_profile);
 router.post('/post-create', PostController.post_create);
+router.get('/post/:title', PostController.post_show);
 router.post('/post-edit', PostController.post_edit);
 router.get('/post-search', PostController.post_search);
 router.delete('/post-delete', PostController.post_delete);

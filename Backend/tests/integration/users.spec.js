@@ -1,19 +1,28 @@
 const request = require('supertest');
 const app = require('../../src/app');
+const connection = require('../../src/database/connection');
 
 describe('users', () => {
+    beforeAll(async () => {
+        await connection.migrate.rollback();
+        await connection.migrate.latest();
+    });
+
+    afterAll(async () => {
+        await connection.destroy();
+    });
+
     it('should be able to create a new user', async () => {
         let response = await request(app)
-                        .post('/sign-in')
+                        .post('/sign-up')
                         .send({
                             name: 'name',
                             email: 'email@email.com',
                             password: 'password'
                         });
 
-        expect(response).toHaveProperty('name');
-        
-        expect(response).toHaveProperty('auth');
+        expect(response.body).toHaveProperty('name');
+        expect(response.body).toHaveProperty('auth');
         expect(response.body.auth).toHaveLength(20);
     });
 
@@ -21,12 +30,12 @@ describe('users', () => {
         let response = await request(app)
                         .post('/login')
                         .send({
-                            user: 'username_or_email',
+                            name: 'username_or_email',
                             password: 'password'
                         });
         
-        expect(response).toHaveProperty('name');
-        expect(response).toHaveProperty('auth');
+        expect(response.body).toHaveProperty('name');
+        expect(response.body).toHaveProperty('auth');
         expect(response.body.auth).toHaveLength(20);
     });
 
@@ -34,10 +43,10 @@ describe('users', () => {
         let response = await request(app)
                         .post('/logout')
                         .send({
-                            name: 'username',
+                            name: 'username'
                         })
                         .auth('auth');
         
-        expect(response).toHaveProperty('logout');
+        expect(response.body).not.toHaveProperty('error');
     });
 });
