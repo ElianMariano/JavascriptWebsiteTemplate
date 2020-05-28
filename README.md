@@ -4,6 +4,7 @@ A customized website template built with ExpressJs in the backend and ReactJs in
 - ExpressJS
 - Cross-Env
 - Jest
+- Nodemon
 - Supertest
 - Knex JS
 
