@@ -4,7 +4,12 @@ const app = require('../../src/app');
 
 describe('Posts', () => {
     beforeAll(async () => {
-        
+        await connection.migrate.rollback();
+        await connection.migrate.latest();
+    });
+
+    afterAll(async () => {
+        await connection.destroy();
     });
 
     it('should be able to create a new post', async () => {
@@ -14,7 +19,7 @@ describe('Posts', () => {
                             name: 'username',
                             email: 'email@email.com'
                         })
-                        .set('Password', 'password')
+                        .set('Password', 'password');
 
         response = await request(app)
                     .post('/post-create')
