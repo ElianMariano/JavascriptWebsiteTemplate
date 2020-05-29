@@ -86,7 +86,7 @@ describe('Categories', () => {
                         .auth(response.body.auth);
 
         response = await request(app)
-                        .delete('/categoies-delete')
+                        .delete('/categories-delete')
                         .send({
                             name: 'username',
                             category: 'category',

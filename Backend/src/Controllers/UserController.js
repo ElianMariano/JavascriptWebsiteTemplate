@@ -43,7 +43,7 @@ module.exports = {
 
         if (user == null){
             return res.status(400).send({
-                error: "This user does not exits!"
+                error: "User or/and password is wrong!"
             });
         }
 
@@ -70,13 +70,13 @@ module.exports = {
                 .select(['name', 'auth'])
                 .first();
         
-        if (user == undefined){
+        if (user == null){
             return res.status(400).send({
-                error: 'This user does not exist!'
+                error: 'User or/and password is wrong!'
             });
         }
 
-        if (user[1] == ''){
+        if (user['auth'] == ''){
             return res.status(400).send({
                 error: 'This user is not logged in!'
             });

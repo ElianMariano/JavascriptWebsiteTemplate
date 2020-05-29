@@ -1,5 +1,5 @@
 const request = require('supertest');
-const connection = request('../../database/connection');
+const connection = require('../../src/database/connection');
 const app = require('../../src/app');
 
 describe('Posts', () => {
