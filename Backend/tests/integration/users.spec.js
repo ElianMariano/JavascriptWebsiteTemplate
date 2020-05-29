@@ -13,13 +13,13 @@ describe('users', () => {
     });
 
     it('should be able to create a new user', async () => {
-        let response = await request(app)
+        const response = await request(app)
                         .post('/sign-up')
                         .send({
-                            name: 'name',
-                            email: 'email@email.com',
-                            password: 'password'
-                        });
+                            name: 'username',
+                            email: 'email@email.com'
+                        })
+                        .set('Password', 'password');
 
         expect(response.body).toHaveProperty('name');
         expect(response.body).toHaveProperty('auth');
@@ -28,11 +28,19 @@ describe('users', () => {
 
     it('should be able to log in', async () => {
         let response = await request(app)
+                        .post('/sign-up')
+                        .send({
+                            name: 'username',
+                            email: 'email@email.com'
+                        })
+                        .set('Password', 'password')
+
+        response = await request(app)
                         .post('/login')
                         .send({
-                            name: 'username_or_email',
-                            password: 'password'
-                        });
+                            name: 'name'
+                        })
+                        .set('Password', 'password');
         
         expect(response.body).toHaveProperty('name');
         expect(response.body).toHaveProperty('auth');
@@ -41,6 +49,14 @@ describe('users', () => {
 
     it('should be able to logout', async () => {
         let response = await request(app)
+                        .post('/sign-up')
+                        .send({
+                            name: 'username',
+                            email: 'email@email.com'
+                        })
+                        .set('Password', 'password')
+
+        response = await request(app)
                         .post('/logout')
                         .send({
                             name: 'username'

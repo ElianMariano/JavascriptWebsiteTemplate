@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('posts', function(table){
-        table.bigInteger('id').primary();
+        table.string('id').primary();
         table.bigInteger('user_id').notNullable();
         table.foreign('user_id').references('id').inTable('users');
         table.string('title').notNullable();
