@@ -3,7 +3,8 @@ const generateUniqueId = require('../../src/utils/generateUniqueId');
 
 module.exports = {
     async login (req, res){
-        const { name, password } = req.body;
+        const { name } = req.body;
+        const { password } = req.headers;
 
         const patt = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
         let user = null;
@@ -91,7 +92,8 @@ module.exports = {
     },
 
     async sign_up (req, res){
-        const { name, email, password} = req.body;
+        const { name, email } = req.body;
+        const { password } = req.headers;
         const unique_id = generateUniqueId();
 
         const user = await connection('users')
