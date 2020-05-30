@@ -40,7 +40,7 @@ module.exports = {
             });
         }
 
-        response = await connection('categories')
+        await connection('categories')
                             .insert({
                                 id: unique_id,
                                 user_id: response['id'],
@@ -129,7 +129,7 @@ module.exports = {
             });
         }
 
-        response = await connection('categories')
+        await connection('categories')
                             .where({
                                 category: category,
                                 user_id: user_id

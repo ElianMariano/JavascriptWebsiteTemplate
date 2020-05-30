@@ -26,12 +26,15 @@ describe('Posts', () => {
                     .send({
                         name: 'username',
                         title: 'post title',
+                        url: 'post-url',
                         content: {},
                         category: 'category'
                     })
                     .auth(response.body.auth);
         
         expect(response.body).toHaveProperty('id');
+        expect(response.body).toHaveProperty('url');
+        expect(response.body).not.toHaveProperty('error');
     });
 
     it('should be able to request a post', async () => {
@@ -55,7 +58,7 @@ describe('Posts', () => {
 
         response = await request(app)
                     .get('/post')
-                    .query({title: 'post title'});
+                    .query({url: 'post-url'});
 
         expect(response.body).toHaveProperty('id');
         expect(response.body).toHaveProperty('title');
@@ -77,6 +80,7 @@ describe('Posts', () => {
                     .send({
                         name: 'username',
                         title: 'post title',
+                        url,
                         content: {},
                         category: 'category'
                     })
@@ -103,6 +107,7 @@ describe('Posts', () => {
                     .send({
                         name: 'username',
                         title: 'post title',
+                        url: 'url',
                         content: {},
                         category: 'category'
                     })
@@ -129,6 +134,7 @@ describe('Posts', () => {
                     .send({
                         name: 'username',
                         title: 'post title',
+                        url: 'post-url',
                         content: {},
                         category: 'category'
                     })
@@ -139,10 +145,15 @@ describe('Posts', () => {
                         .send({
                             name: 'username',
                             title: 'new post title',
+                            url: 'post-url',
                             content: {},
                             category: 'new category'
                         })
                         .auth('authkey')
                         .query({id: 'id'});
+
+        expect(response.body).toHaveProperty('id');
+        expect(response.body).toHaveProperty('url');
+        expect(response.body).not.toHaveProperty('error');
     });
 });
