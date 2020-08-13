@@ -1,4 +1,4 @@
-# JavascriptWebsiteTemplate
+# WebsiteTemplate
 A customized website template built with ExpressJs in the backend and ReactJs in the frontend. The backend of the application has the following dependecies:
 
 - ExpressJS
