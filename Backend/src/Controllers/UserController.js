@@ -42,19 +42,19 @@ module.exports = {
         }
 
         if (user == null){
-            return res.status(400).send({
+            return res.status(400).json({
                 error: "User or/and password is wrong!"
             });
         }
 
         if (hasEmail){
-            return res.send({
+            return res.json({
                 name: user['name'],
                 auth: unique_id
             })
         }
         else{
-            return res.send({
+            return res.json({
                 name: name,
                 auth: unique_id,
             });
@@ -71,13 +71,13 @@ module.exports = {
                 .first();
         
         if (user == null){
-            return res.status(400).send({
+            return res.status(400).json({
                 error: 'User or/and password is wrong!'
             });
         }
 
         if (user['auth'] == ''){
-            return res.status(400).send({
+            return res.status(400).json({
                 error: 'This user is not logged in!'
             });
         }
@@ -102,7 +102,7 @@ module.exports = {
                 .first();
 
         if (user != null && name == user){
-            return res.status(400).send({
+            return res.status(400).json({
                 error: 'This user alredy exists!'
             });
         }
@@ -116,7 +116,7 @@ module.exports = {
                     is_admin: false
                 });
 
-        return res.send({
+        return res.json({
             name: name,
             auth: unique_id
         });

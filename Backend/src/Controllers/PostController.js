@@ -14,7 +14,7 @@ module.exports = {
 
         res.set('X-Total-Count', count['count(*)']);
 
-        return res.send(posts);
+        return res.json(posts);
     },
 
     async post_create(req, res){
@@ -31,7 +31,7 @@ module.exports = {
                         .first();
         
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "User not found!"
             });
         }
@@ -46,7 +46,7 @@ module.exports = {
                         .first();
 
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "This category does not exists!"
             });
         }
@@ -57,7 +57,7 @@ module.exports = {
                         .first();
 
         if (response != undefined){
-            return res.status(400).send({
+            return res.status(400).json({
                 error: "This url already exists!"
             });
         }
@@ -73,7 +73,7 @@ module.exports = {
                         date: Date.now()
                     });
 
-        return res.send({
+        return res.json({
             id: unique_id,
             url: url
         });
@@ -88,12 +88,12 @@ module.exports = {
                             .first();
 
         if (post == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "Could not find post"
             })
         }
 
-        return res.send(post);
+        return res.json(post);
     },
 
     async post_edit(req, res){
@@ -110,7 +110,7 @@ module.exports = {
                         .first();
         
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "User not found!"
             });
         }
@@ -123,7 +123,7 @@ module.exports = {
                         .first();
 
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "This category does not exist!"
             });
         }
@@ -134,7 +134,7 @@ module.exports = {
                         .first();
 
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "This post does not exist!"
             });
         }
@@ -148,7 +148,7 @@ module.exports = {
                         post_category: category
                     });
 
-        return res.send({
+        return res.json({
             id: response['id'],
             url: url
         });
@@ -172,7 +172,7 @@ module.exports = {
                         .first();
 
             if (response == undefined && response['id'] == null){
-                res.status(406).send({
+                res.status(406).json({
                     error: "Category not found!"
                 })
             }
@@ -182,7 +182,7 @@ module.exports = {
                         .select('*');
         }
 
-        return res.send({posts: response});
+        return res.json({posts: response});
     },
 
     async post_delete(req, res){
@@ -199,7 +199,7 @@ module.exports = {
                         .first();
         
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "User not found!"
             });
         }
@@ -210,7 +210,7 @@ module.exports = {
                         .first();
 
         if (response == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: "This post does not exist!"
             });
         }

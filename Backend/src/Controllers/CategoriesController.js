@@ -6,8 +6,13 @@ module.exports = {
         const response = await connection('categories')
                             .select('*');
 
+        response.map(res => {
+            res.date = Date.parse(res.date);
+            return res;
+        })
+
         return res.set('X-Total-Count', response.length)
-                .send({'categories': response});
+                .json({'categories': response});
     },
 
     async categories_create(req, res){
@@ -21,7 +26,7 @@ module.exports = {
                             .first();
 
         if (response != undefined && response['category'] == category){
-            return res.status(400).send({
+            return res.status(400).json({
                 error: 'This category already exists!'
             });
         }
@@ -35,7 +40,7 @@ module.exports = {
                             .first();
 
         if (response == undefined && response['id'] == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: 'Can not find the user!'
             });
         }
@@ -45,10 +50,10 @@ module.exports = {
                                 id: unique_id,
                                 user_id: response['id'],
                                 category: category,
-                                date: Date.now()
+                                date: Date.now(),
                             });
 
-        return res.status(201).send({'category': category});
+        return res.status(201).json({'category': category});
     },
 
     async categories_edit(req, res){
@@ -64,7 +69,7 @@ module.exports = {
                             .first();
 
         if (response == undefined && response['id'] == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: 'Can not find the user!'
             });
         }
@@ -80,7 +85,7 @@ module.exports = {
                             .first();
 
         if (response == undefined && response['category'] == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: 'This category does not exist!'
             });
         }
@@ -92,9 +97,10 @@ module.exports = {
                             })
                             .update('category', new_category);
 
-        return res.status(202).send({'category': new_category});
+        return res.status(202).json({'category': new_category});
     },
 
+    // TODO Test with wrong category
     async categories_delete(req, res){
         const { name, category } = req.body;
         const auth = req.headers.authorization;
@@ -108,7 +114,7 @@ module.exports = {
                             .first();
 
         if (response == undefined && response['id'] == undefined){
-            return res.status(406).send({
+            return res.status(406).json({
                 error: 'Can not find the user!'
             });
         }
@@ -123,8 +129,8 @@ module.exports = {
                             .select('category')
                             .first();
 
-        if (response == undefined && response['category'] == undefined){
-            return res.status(406).send({
+        if (response == undefined || response['category'] == undefined){
+            return res.status(406).json({
                 error: 'This category does not exist!'
             });
         }
@@ -136,6 +142,6 @@ module.exports = {
                             })
                             .delete();
 
-        return res.status(202).send({'category': category});
+        return res.status(202).json({'category': category});
     }
 }
