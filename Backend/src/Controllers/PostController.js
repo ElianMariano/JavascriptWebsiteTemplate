@@ -18,7 +18,7 @@ module.exports = {
     },
 
     async post_create(req, res){
-        const { name, title, url, content, category } = req.body;
+        const { name, title, url, category } = req.body;
         const auth = req.headers.authorization;
         const unique_id = generateUniqueId(8);
 
@@ -68,7 +68,6 @@ module.exports = {
                         user_id: user_id,
                         title: title,
                         url: url,
-                        content: JSON.stringify(content),
                         post_category: category,
                         date: Date.now()
                     });
@@ -97,7 +96,7 @@ module.exports = {
     },
 
     async post_edit(req, res){
-        const { name, title, url, content, category } = req.body;
+        const { name, title, url, category } = req.body;
         const { id } = req.query;
         const auth = req.headers.authorization;
 
@@ -144,7 +143,6 @@ module.exports = {
                     .update({
                         title: title,
                         url: url,
-                        content: JSON.stringify(content),
                         post_category: category
                     });
 
